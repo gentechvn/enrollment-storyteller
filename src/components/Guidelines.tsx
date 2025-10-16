@@ -149,7 +149,7 @@ const Guidelines = () => {
       </div>
 
       {/* Navigation arrows */}
-      <div className="absolute bottom-8 right-8 flex flex-col gap-2">
+      <div className="bsolute top-1/2 -translate-y-1/2 right-8 flex flex-col gap-2">
         <button
           onClick={() => scrollToSection('stories')}
           className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
