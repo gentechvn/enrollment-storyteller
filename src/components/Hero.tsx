@@ -79,6 +79,17 @@ const Hero = () => {
           -webkit-text-fill-color: transparent;
         }
       `}</style>
+
+      {/* Navigation arrow */}
+      <div className="absolute top-1/2 -translate-y-1/2 right-8">
+        <button
+          onClick={scrollToContent}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to next section"
+        >
+          <ArrowDown className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
+      </div>
     </section>
   );
 };
