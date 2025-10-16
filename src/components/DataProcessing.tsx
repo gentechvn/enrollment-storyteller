@@ -153,7 +153,7 @@ const DataProcessing = () => {
       </div>
 
       {/* Navigation arrows */}
-      <div className="bsolute top-1/2 -translate-y-1/2 right-8 flex flex-col gap-2">
+      <div className="absolute top-1/2 -translate-y-1/2 right-8 flex flex-col gap-2">
         <button
           onClick={() => scrollToSection('challenges')}
           className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
