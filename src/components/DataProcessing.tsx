@@ -1,6 +1,9 @@
-import { Database, Globe, Users, Smartphone } from "lucide-react";
+import { Database, Globe, Users, Smartphone, ArrowUp, ArrowDown } from "lucide-react";
 
 const DataProcessing = () => {
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
   const dataSources = [
     {
       icon: Users,
@@ -26,10 +29,10 @@ const DataProcessing = () => {
   ];
 
   return (
-    <section className="py-20 px-6 gradient-section">
+    <section id="data-processing" className="relative py-20 px-6 gradient-section">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-accent/10 px-6 py-3 rounded-full mb-6">
             <Database className="w-5 h-5 text-accent" />
             <span className="text-accent font-semibold">Xử lý dữ liệu</span>
@@ -53,7 +56,8 @@ const DataProcessing = () => {
             {dataSources.map((source, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl shadow-soft hover:shadow-medium transition-smooth p-8 relative overflow-hidden"
+                className="bg-white rounded-2xl shadow-soft hover:shadow-medium hover-scale transition-smooth p-8 relative overflow-hidden animate-fade-in"
+                style={{ animationDelay: `${index * 0.15}s` }}
               >
                 {/* Importance badge */}
                 <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold ${
@@ -83,7 +87,7 @@ const DataProcessing = () => {
         </div>
 
         {/* CRM Pipeline */}
-        <div className="bg-white rounded-3xl shadow-medium p-8 md:p-12">
+        <div className="bg-white rounded-3xl shadow-medium p-8 md:p-12 animate-fade-in hover-scale">
           <h3 className="text-3xl font-bold text-foreground mb-8 text-center">
             Quy trình xử lý trên <span className="text-primary">Getfly CRM</span>
           </h3>
@@ -137,7 +141,7 @@ const DataProcessing = () => {
         </div>
 
         {/* Key insight */}
-        <div className="mt-12 relative overflow-hidden rounded-3xl shadow-medium">
+        <div className="mt-12 relative overflow-hidden rounded-3xl shadow-medium animate-fade-in">
           <div className="absolute inset-0 gradient-hero opacity-95"></div>
           <div className="relative p-8 md:p-12 text-center">
             <div className="text-5xl mb-4">🎯</div>
@@ -146,6 +150,24 @@ const DataProcessing = () => {
             </blockquote>
           </div>
         </div>
+      </div>
+
+      {/* Navigation arrows */}
+      <div className="absolute bottom-8 right-8 flex flex-col gap-2">
+        <button
+          onClick={() => scrollToSection('challenges')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to previous section"
+        >
+          <ArrowUp className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
+        <button
+          onClick={() => scrollToSection('student-groups')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to next section"
+        >
+          <ArrowDown className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
       </div>
     </section>
   );

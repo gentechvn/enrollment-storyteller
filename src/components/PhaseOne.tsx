@@ -1,6 +1,9 @@
-import { Users, MessageCircle, Target, TrendingUp } from "lucide-react";
+import { Users, MessageCircle, Target, TrendingUp, ArrowUp, ArrowDown } from "lucide-react";
 
 const PhaseOne = () => {
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
   const approaches = [
     {
       icon: MessageCircle,
@@ -20,10 +23,10 @@ const PhaseOne = () => {
   ];
 
   return (
-    <section className="py-20 px-6 bg-white">
+    <section id="phase-one" className="relative py-20 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-16 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-primary/10 px-6 py-3 rounded-full mb-6">
             <span className="text-3xl font-black text-primary">01</span>
             <span className="text-primary font-semibold">Giai đoạn đầu tiên</span>
@@ -37,7 +40,7 @@ const PhaseOne = () => {
 
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
           {/* Objective card */}
-          <div className="bg-gradient-section rounded-3xl shadow-soft p-8">
+          <div className="bg-gradient-section rounded-3xl shadow-soft p-8 hover-scale animate-fade-in">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <Target className="w-6 h-6 text-primary" />
@@ -61,7 +64,7 @@ const PhaseOne = () => {
           </div>
 
           {/* Success metrics */}
-          <div className="bg-white rounded-3xl shadow-soft p-8 border-2 border-primary/20">
+          <div className="bg-white rounded-3xl shadow-soft p-8 border-2 border-primary/20 hover-scale animate-fade-in">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center">
                 <TrendingUp className="w-6 h-6 text-secondary" />
@@ -94,7 +97,8 @@ const PhaseOne = () => {
             {approaches.map((approach, index) => (
               <div
                 key={index}
-                className="group bg-white rounded-2xl shadow-soft hover:shadow-medium transition-smooth p-8 border-2 border-transparent hover:border-primary/20"
+                className="group bg-white rounded-2xl shadow-soft hover:shadow-medium transition-smooth p-8 border-2 border-transparent hover:border-primary/20 hover-scale animate-fade-in"
+                style={{ animationDelay: `${index * 0.15}s` }}
               >
                 <div className="w-16 h-16 rounded-full bg-primary/10 group-hover:bg-primary group-hover:scale-110 transition-smooth flex items-center justify-center mb-6 mx-auto">
                   <approach.icon className="w-8 h-8 text-primary group-hover:text-white transition-smooth" />
@@ -111,7 +115,7 @@ const PhaseOne = () => {
         </div>
 
         {/* Quote */}
-        <div className="relative overflow-hidden rounded-3xl shadow-medium">
+        <div className="relative overflow-hidden rounded-3xl shadow-medium animate-fade-in">
           <div className="absolute inset-0 gradient-accent opacity-90"></div>
           <div className="relative p-8 md:p-12">
             <div className="text-5xl mb-4">💭</div>
@@ -120,6 +124,24 @@ const PhaseOne = () => {
             </blockquote>
           </div>
         </div>
+      </div>
+
+      {/* Navigation arrows */}
+      <div className="absolute bottom-8 right-8 flex flex-col gap-2">
+        <button
+          onClick={() => scrollToSection('journey-overview')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to previous section"
+        >
+          <ArrowUp className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
+        <button
+          onClick={() => scrollToSection('challenges')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to next section"
+        >
+          <ArrowDown className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
       </div>
     </section>
   );

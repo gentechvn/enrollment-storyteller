@@ -1,6 +1,9 @@
-import { AlertTriangle, Clock, TrendingDown, Users } from "lucide-react";
+import { AlertTriangle, Clock, TrendingDown, Users, ArrowUp, ArrowDown } from "lucide-react";
 
 const Challenges = () => {
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
   const challenges = [
     {
       icon: TrendingDown,
@@ -29,9 +32,9 @@ const Challenges = () => {
   ];
 
   return (
-    <section className="py-20 px-6 bg-muted/30">
+    <section id="challenges" className="relative py-20 px-6 bg-muted/30">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-destructive/10 px-6 py-3 rounded-full mb-6">
             <AlertTriangle className="w-5 h-5 text-destructive" />
             <span className="text-destructive font-semibold">Thực tế & Khó khăn</span>
@@ -50,7 +53,8 @@ const Challenges = () => {
           {challenges.map((challenge, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl shadow-soft p-8 hover:shadow-medium transition-smooth"
+              className="bg-white rounded-2xl shadow-soft p-8 hover:shadow-medium hover-scale transition-smooth animate-fade-in"
+              style={{ animationDelay: `${index * 0.15}s` }}
             >
               <div className="flex items-start gap-6">
                 <div className="flex-shrink-0">
@@ -78,7 +82,7 @@ const Challenges = () => {
         </div>
 
         {/* Solution approach */}
-        <div className="relative overflow-hidden rounded-3xl shadow-medium">
+        <div className="relative overflow-hidden rounded-3xl shadow-medium animate-fade-in">
           <div className="absolute inset-0 gradient-hero opacity-95"></div>
           <div className="relative p-8 md:p-12">
             <div className="max-w-3xl mx-auto text-center">
@@ -103,6 +107,24 @@ const Challenges = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Navigation arrows */}
+      <div className="absolute bottom-8 right-8 flex flex-col gap-2">
+        <button
+          onClick={() => scrollToSection('phase-one')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to previous section"
+        >
+          <ArrowUp className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
+        <button
+          onClick={() => scrollToSection('data-processing')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to next section"
+        >
+          <ArrowDown className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
       </div>
     </section>
   );

@@ -1,6 +1,9 @@
-import { Compass, Heart, Target, Smile, Award, Users } from "lucide-react";
+import { Compass, Heart, Target, Smile, Award, Users, ArrowUp, ArrowDown } from "lucide-react";
 
 const Guidelines = () => {
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
   const principles = [
     {
       icon: Compass,
@@ -41,10 +44,10 @@ const Guidelines = () => {
   ];
 
   return (
-    <section className="py-20 px-6 bg-white">
+    <section id="guidelines" className="relative py-20 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-primary/10 px-6 py-3 rounded-full mb-6">
             <Compass className="w-5 h-5 text-primary" />
             <span className="text-primary font-semibold">Nguyên tắc thành công</span>
@@ -64,7 +67,8 @@ const Guidelines = () => {
           {principles.map((principle, index) => (
             <div
               key={index}
-              className="group bg-gradient-section rounded-2xl shadow-soft hover:shadow-medium transition-smooth p-8 relative overflow-hidden"
+              className="group bg-gradient-section rounded-2xl shadow-soft hover:shadow-medium hover-scale transition-smooth p-8 relative overflow-hidden animate-fade-in"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Number badge */}
               <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white shadow-soft flex items-center justify-center">
@@ -91,7 +95,7 @@ const Guidelines = () => {
         </div>
 
         {/* Core philosophy */}
-        <div className="relative overflow-hidden rounded-3xl shadow-medium mb-12">
+        <div className="relative overflow-hidden rounded-3xl shadow-medium mb-12 animate-fade-in">
           <div className="absolute inset-0 gradient-hero opacity-95"></div>
           <div className="relative p-8 md:p-12">
             <div className="max-w-4xl mx-auto">
@@ -126,7 +130,7 @@ const Guidelines = () => {
         </div>
 
         {/* Visual summary */}
-        <div className="bg-gradient-section rounded-3xl shadow-soft p-8 md:p-12">
+        <div className="bg-gradient-section rounded-3xl shadow-soft p-8 md:p-12 animate-fade-in hover-scale">
           <div className="max-w-3xl mx-auto text-center">
             <h3 className="text-3xl font-bold text-foreground mb-8">
               Công thức thành công
@@ -142,6 +146,24 @@ const Guidelines = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Navigation arrows */}
+      <div className="absolute bottom-8 right-8 flex flex-col gap-2">
+        <button
+          onClick={() => scrollToSection('stories')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to previous section"
+        >
+          <ArrowUp className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
+        <button
+          onClick={() => scrollToSection('conclusion')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to next section"
+        >
+          <ArrowDown className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
       </div>
     </section>
   );

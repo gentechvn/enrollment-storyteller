@@ -1,6 +1,9 @@
-import { BookOpen, Lightbulb } from "lucide-react";
+import { BookOpen, Lightbulb, ArrowUp, ArrowDown } from "lucide-react";
 
 const Stories = () => {
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
   const stories = [
     {
       emoji: "👀",
@@ -32,10 +35,10 @@ const Stories = () => {
   ];
 
   return (
-    <section className="py-20 px-6 gradient-section">
+    <section id="stories" className="relative py-20 px-6 gradient-section">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-accent/10 px-6 py-3 rounded-full mb-6">
             <BookOpen className="w-5 h-5 text-accent" />
             <span className="text-accent font-semibold">Câu chuyện thực tế</span>
@@ -55,7 +58,8 @@ const Stories = () => {
           {stories.map((story, index) => (
             <div
               key={index}
-              className={`bg-white rounded-3xl shadow-soft hover:shadow-medium transition-smooth overflow-hidden border-l-8 ${story.color}`}
+              className={`bg-white rounded-3xl shadow-soft hover:shadow-medium hover-scale transition-smooth overflow-hidden border-l-8 ${story.color} animate-fade-in`}
+              style={{ animationDelay: `${index * 0.2}s` }}
             >
               <div className="p-8 md:p-12">
                 {/* Story header */}
@@ -132,7 +136,7 @@ const Stories = () => {
         </div>
 
         {/* Emotional reflection */}
-        <div className="mt-12 relative overflow-hidden rounded-3xl shadow-medium">
+        <div className="mt-12 relative overflow-hidden rounded-3xl shadow-medium animate-fade-in">
           <div className="absolute inset-0 gradient-hero opacity-95"></div>
           <div className="relative p-8 md:p-12 text-center">
             <div className="text-5xl mb-4">💭</div>
@@ -141,6 +145,24 @@ const Stories = () => {
             </blockquote>
           </div>
         </div>
+      </div>
+
+      {/* Navigation arrows */}
+      <div className="absolute bottom-8 right-8 flex flex-col gap-2">
+        <button
+          onClick={() => scrollToSection('student-groups')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to previous section"
+        >
+          <ArrowUp className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
+        <button
+          onClick={() => scrollToSection('guidelines')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to next section"
+        >
+          <ArrowDown className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
       </div>
     </section>
   );

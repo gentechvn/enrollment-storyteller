@@ -1,11 +1,15 @@
-import { Heart, Sparkles } from "lucide-react";
+import { Heart, Sparkles, ArrowUp, ArrowDown } from "lucide-react";
 
 const Introduction = () => {
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <section id="introduction" className="py-20 px-6 bg-white">
+    <section id="introduction" className="relative py-20 px-6 bg-white">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-primary/10 px-6 py-3 rounded-full mb-6">
+        <div className="text-center mb-16 animate-fade-in">
+          <div className="inline-flex items-center gap-2 bg-primary/10 px-6 py-3 rounded-full mb-6 animate-scale-in">
             <Heart className="w-5 h-5 text-primary" />
             <span className="text-primary font-semibold">Lời mở đầu</span>
           </div>
@@ -15,7 +19,7 @@ const Introduction = () => {
         </div>
 
         <div className="space-y-8">
-          <div className="bg-gradient-section p-8 md:p-12 rounded-3xl shadow-soft">
+          <div className="bg-gradient-section p-8 md:p-12 rounded-3xl shadow-soft hover-scale animate-fade-in">
             <p className="text-lg md:text-xl text-foreground leading-relaxed mb-6">
               Kính gửi <span className="font-bold text-primary">Chủ tịch HĐQT</span>, quý <span className="font-bold">Thầy Cô</span> và toàn thể <span className="font-bold">đồng nghiệp</span> thân mến,
             </p>
@@ -42,7 +46,7 @@ const Introduction = () => {
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-3xl shadow-medium">
+          <div className="relative overflow-hidden rounded-3xl shadow-medium animate-fade-in">
             <div className="absolute inset-0 gradient-hero opacity-95"></div>
             <div className="relative p-8 md:p-12 text-center">
               <div className="text-6xl mb-4">💬</div>
@@ -52,6 +56,24 @@ const Introduction = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Navigation arrows */}
+      <div className="absolute bottom-8 right-8 flex flex-col gap-2">
+        <button
+          onClick={() => scrollToSection('hero')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
+        <button
+          onClick={() => scrollToSection('journey-overview')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to next section"
+        >
+          <ArrowDown className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
       </div>
     </section>
   );

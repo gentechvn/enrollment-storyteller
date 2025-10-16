@@ -1,6 +1,9 @@
-import { Sprout, Heart, CheckCircle } from "lucide-react";
+import { Sprout, Heart, CheckCircle, ArrowUp, ArrowDown } from "lucide-react";
 
 const JourneyOverview = () => {
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
   const steps = [
     {
       icon: Sprout,
@@ -23,9 +26,9 @@ const JourneyOverview = () => {
   ];
 
   return (
-    <section className="py-20 px-6 gradient-section">
+    <section id="journey-overview" className="relative py-20 px-6 gradient-section">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             Hành trình <span className="text-primary">"Chốt"</span> sinh viên
           </h2>
@@ -40,13 +43,14 @@ const JourneyOverview = () => {
             {steps.map((step, index) => (
               <div
                 key={index}
-                className="relative"
+                 className="relative animate-fade-in"
                 style={{
                   width: `${100 - index * 15}%`,
-                  margin: '0 auto'
+                  margin: '0 auto',
+                  animationDelay: `${index * 0.2}s`
                 }}
               >
-                <div className="bg-white rounded-2xl shadow-soft p-8 hover:shadow-medium transition-smooth">
+                <div className="bg-white rounded-2xl shadow-soft p-8 hover:shadow-medium hover-scale transition-smooth">
                   <div className="flex items-center gap-6">
                     <div className={`flex-shrink-0 w-16 h-16 rounded-full bg-${step.color.split('-')[1]}/10 flex items-center justify-center`}>
                       <step.icon className={`w-8 h-8 ${step.color}`} />
@@ -76,7 +80,7 @@ const JourneyOverview = () => {
         </div>
 
         {/* Key insight */}
-        <div className="bg-white rounded-3xl shadow-medium p-8 md:p-12 max-w-3xl mx-auto">
+        <div className="bg-white rounded-3xl shadow-medium p-8 md:p-12 max-w-3xl mx-auto animate-fade-in hover-scale">
           <div className="text-center">
             <div className="inline-block bg-accent/10 px-6 py-3 rounded-full mb-6">
               <span className="text-accent font-bold text-lg">💡 Điểm mấu chốt</span>
@@ -86,6 +90,24 @@ const JourneyOverview = () => {
             </p>
           </div>
         </div>
+      </div>
+
+      {/* Navigation arrows */}
+      <div className="absolute bottom-8 right-8 flex flex-col gap-2">
+        <button
+          onClick={() => scrollToSection('introduction')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to previous section"
+        >
+          <ArrowUp className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
+        <button
+          onClick={() => scrollToSection('phase-one')}
+          className="group p-3 bg-white shadow-medium rounded-full hover:bg-primary transition-smooth"
+          aria-label="Scroll to next section"
+        >
+          <ArrowDown className="w-5 h-5 text-primary group-hover:text-white transition-smooth" />
+        </button>
       </div>
     </section>
   );
